@@ -1,0 +1,76 @@
+{% extends "layout.html" %} {% block content %}
+
+<h2>Dashboard</h2>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card bg-primary text-white">
+      <div class="card-body">
+        <h5>Total Students</h5>
+
+        <h2>{{total_students}}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card bg-success text-white">
+      <div class="card-body">
+        <h5>Average GPA</h5>
+
+        <h2>{{avg_gpa}}</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+
+<a href="/add" class="btn btn-primary">Add Student</a>
+<a href="/export" class="btn btn-success">Export CSV</a>
+
+<br /><br />
+
+<form method="get">
+  <input
+    type="text"
+    name="search"
+    class="form-control"
+    placeholder="Search student"
+  />
+</form>
+
+<br />
+
+<table class="table table-striped">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Major</th>
+    <th>GPA</th>
+    <th>Class</th>
+    <th>Action</th>
+  </tr>
+
+  {% for s in students %}
+
+  <tr>
+    <td>{{s.student_id}}</td>
+    <td>{{s.name}}</td>
+    <td>{{s.major}}</td>
+    <td>{{s.gpa}}</td>
+    <td>{{s.class_id}}</td>
+
+    <td>
+      <a href="/edit/{{s.student_id}}" class="btn btn-warning btn-sm"> Edit </a>
+
+      <a href="/delete/{{s.student_id}}" class="btn btn-danger btn-sm">
+        Delete
+      </a>
+    </td>
+  </tr>
+
+  {% endfor %}
+</table>
+
+{% endblock %}

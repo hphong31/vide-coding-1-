@@ -1,0 +1,72 @@
+{% extends "layout.html" %} {% block content %}
+
+<h2>{% if student %} Edit Student {% else %} Add Student {% endif %}</h2>
+
+<form
+  method="post"
+  action="{% if student %}/update/{{student.student_id}}{% else %}/add{% endif %}"
+>
+  <label>Student ID</label>
+
+  <input
+    name="student_id"
+    class="form-control"
+    value="{{student.student_id if student}}"
+    {%
+    if
+    student
+    %}readonly{%
+    endif
+    %}
+  />
+
+  <br />
+
+  <label>Name</label>
+
+  <input name="name" class="form-control" value="{{student.name if student}}" />
+
+  <br />
+
+  <label>Birth Year</label>
+
+  <input
+    name="birth_year"
+    class="form-control"
+    value="{{student.birth_year if student}}"
+  />
+
+  <br />
+
+  <label>Major</label>
+
+  <input
+    name="major"
+    class="form-control"
+    value="{{student.major if student}}"
+  />
+
+  <br />
+
+  <label>GPA</label>
+
+  <input name="gpa" class="form-control" value="{{student.gpa if student}}" />
+
+  <br />
+
+  <label>Class</label>
+
+  <select name="class_id" class="form-control">
+    {% for c in classes %}
+
+    <option value="{{c.class_id}}">{{c.class_name}}</option>
+
+    {% endfor %}
+  </select>
+
+  <br />
+
+  <button class="btn btn-success">Save</button>
+</form>
+
+{% endblock %}
